@@ -1,4 +1,45 @@
-# Paper Reconstruction Stage 2
+# Paper Reconstruction Stage 2 — v2 distribution
+
+Distribution **2.0.0** adds the release interface used by the modular v2 pipeline.
+The production core remains software **1.0.2**, the frozen boundary model remains
+release **1.0.0**, and both Stage 2 wire schemas are unchanged. Stage 3 v2.0.0 can
+authenticate the same model/configuration lineage without retraining or adapter
+changes. Stage 4 v2.0.5 remains the global assembly consumer.
+
+## Portable CPU release
+
+With Python 3.14 and Git LFS installed:
+
+```text
+git lfs pull
+python -B tools/setup.py --with-tests
+.venv/Scripts/python.exe -B tools/verify_release.py
+.venv/Scripts/paper-stage2.exe verify --models models
+```
+
+On Linux use `.venv/bin/python` and `.venv/bin/paper-stage2`. Setup creates a
+fresh environment, uses `constraints.txt`, and installs no training/export Torch
+dependency. Actual qualification platforms are listed in
+[docs/VALIDATION.md](docs/VALIDATION.md).
+
+```text
+paper-stage2 run --input <prepared-stage1> --output <new-stage2-output> --models <models-directory>
+paper-stage2 inspect --input <stage2-output> --models <models-directory>
+```
+
+`run` executes the unchanged production predictor and independently verifies the
+completed export. Model paths are explicit; the command works from any working
+directory. Progress goes to stderr and stdout contains one JSON result. Exit
+codes are 0 for verified publication, 2 for failure, and 130 for interruption.
+Repeat with `--resume` to reuse authenticated per-piece commits. The original
+`run-stage2-inference` and `verify-stage2-output` commands remain available.
+
+The Stage 1 boundary preparation policy belongs to composition tooling. Use the
+versioned native-frame adapter before Stage 2 when processing raw predicted masks;
+preserve raw segmentation, accepted inventory and the adjustment receipt. See
+[orchestrator contract](docs/ORCHESTRATOR.md),
+[Stage 1 contract](docs/STAGE1_INTEGRATION.md) and
+[compatibility metadata](compatibility.json).
 
 This repository is the complete Stage 2 boundary-understanding component of the
 torn-paper reconstruction pipeline. It does not replace Stage 1 segmentation.
