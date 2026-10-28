@@ -1,0 +1,44 @@
+{
+  "compatible_pipeline_release": "2.0.5",
+  "component_software_version": "1.0.2",
+  "downstream": {
+    "model_configuration_unchanged_from": "Stage 2 v1.0.2",
+    "stage3_release": "2.0.0",
+    "stage4_release": "2.0.5"
+  },
+  "interface": {
+    "command": "paper-stage2",
+    "commands": [
+      "run",
+      "inspect",
+      "verify"
+    ],
+    "exit_codes": {
+      "failed": 2,
+      "interrupted": 130,
+      "ready": 0
+    },
+    "manifest_schema": "stage2.edge-hypotheses-manifest.v1",
+    "piece_schema": "stage2.edge-hypotheses.v1",
+    "progress_stream": "stderr",
+    "result_stream": "stdout JSON"
+  },
+  "model": {
+    "path": "models/stage2_boundary_v1.0.0.onnx",
+    "release_manifest_sha256": "0381683f5c8226974d73915b355bdd5936d80707219e7f083dcdf08f1ecfcfbc",
+    "release_version": "1.0.0",
+    "sha256": "3e80716280375146e2ef66942688e2a262e503df1011918caff262f0bae388a4"
+  },
+  "module": "paper_reconstruction_stage2",
+  "qualification_scope": "Packaging and interoperability of frozen models; no new accuracy claim",
+  "release_version": "2.0.0",
+  "runtime": {
+    "constraints": "constraints.txt",
+    "default_device": "cpu",
+    "gpu_required": false,
+    "provider": "CPUExecutionProvider",
+    "python_major_minor": "3.14"
+  },
+  "schema_version": "stage2.release-compatibility.v1",
+  "source_inventory": "provenance/runtime_sources.json"
+}

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "paper-reconstruction-stage2"
-version = "1.0.2"
+version = "2.0.0"
 description = "Truth-free boundary-role and edge-hypothesis inference for torn-paper reconstruction."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -30,6 +30,7 @@ export = [
 ]
 
 [project.scripts]
+paper-stage2 = "paper_reconstruction_stage2.release_cli:main"
 generate-stage2-dataset = "paper_reconstruction_stage2.cli:main"
 compile-stage2-observations = "paper_reconstruction_stage2.observation_cli:main"
 compile-stage2-boundaries = "paper_reconstruction_stage2.boundary_cli:main"
@@ -51,3 +52,6 @@ validate-stage2-onnx = "paper_reconstruction_stage2.onnx_parity_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+paper_reconstruction_stage2 = ["compatibility.json"]
